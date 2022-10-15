@@ -40,4 +40,7 @@ fileprivate struct TrackManipulator {
 
 final class ParallelPlayDemo: PlayerItemMaker {
 
+    func makePlayerItem() -> AVPlayerItem? {
+        nil
+    }
 }
