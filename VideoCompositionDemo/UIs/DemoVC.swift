@@ -18,7 +18,8 @@ final class DemoVC: UIViewController {
     @IBAction private func play() {
         let demo: PlayerItemMaker = {
 //            BasicDemo()
-            SequentialPlayDemo()
+//            SequentialPlayDemo()
+            ParallelPlayDemo()
         }()
 
         guard let playerItem = demo.makePlayerItem() else {
