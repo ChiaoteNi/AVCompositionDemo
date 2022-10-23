@@ -19,7 +19,8 @@ final class DemoVC: UIViewController {
         let demo: PlayerItemMaker = {
 //            BasicDemo()
 //            SequentialPlayDemo()
-            ParallelPlayDemo()
+//            ParallelPlayDemo()
+            WatermarkDemo()
         }()
 
         guard let playerItem = demo.makePlayerItem() else {
