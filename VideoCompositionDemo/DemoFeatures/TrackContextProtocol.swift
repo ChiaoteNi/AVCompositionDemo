@@ -8,14 +8,14 @@
 import Foundation
 import AVFoundation
 
-protocol TrackContext {
+protocol TrackContextProtocol {
     var asset: AVAsset { get }
     var preferredTimeRange: CMTimeRange { get }
     var preferredStartTime: CMTime { get }
     var preferredTrackID: CMPersistentTrackID { get }
 }
 
-extension TrackContext {
+extension TrackContextProtocol {
 
     func trackID(for mediaType: AVMediaType) -> CMPersistentTrackID {
         // ⬇️ Just for convenience to make the demo, you should not create the trackID like this.

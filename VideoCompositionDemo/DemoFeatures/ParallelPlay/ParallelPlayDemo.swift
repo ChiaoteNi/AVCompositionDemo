@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-private struct ParallelTrackContext: TrackContext {
+private struct ParallelTrackContext: TrackContextProtocol {
     let asset: AVAsset
     let preferredTimeRange: CMTimeRange
     let preferredStartTime: CMTime
@@ -41,10 +41,10 @@ extension ParallelPlayDemo {
 
     private func makeTrackContexts() -> [ParallelTrackContext] {
         guard
-            let topLeftAsset = makeAVAsset(for: "IMG_1007", with: "MOV"),
-            let topRightAsset = makeAVAsset(for: "IMG_7459", with: "MOV"),
-            let bottomLeftAsset = makeAVAsset(for: "IMG_7459", with: "MOV"),
-            let bottomRightAsset = makeAVAsset(for: "IMG_1007", with: "MOV")
+            let topLeftAsset = AVAsset(for: "IMG_1007", withExtension: "MOV"),
+            let topRightAsset = AVAsset(for: "IMG_7459", withExtension: "MOV"),
+            let bottomLeftAsset = AVAsset(for: "IMG_7459", withExtension: "MOV"),
+            let bottomRightAsset = AVAsset(for: "IMG_1007", withExtension: "MOV")
         else {
             return []
         }
@@ -103,7 +103,7 @@ extension ParallelPlayDemo {
         ]
     }
 
-    private func makeComposition(with trackContexts: [TrackContext]) -> AVComposition {
+    private func makeComposition(with trackContexts: [TrackContextProtocol]) -> AVComposition {
         let composition = AVMutableComposition()
 
         trackContexts.forEach { trackContext in
@@ -118,20 +118,8 @@ extension ParallelPlayDemo {
         return composition
     }
 
-    private func makeAudioMix(with trackContexts: [TrackContext]) -> AVAudioMix? {
+    private func makeAudioMix(with trackContexts: [TrackContextProtocol]) -> AVAudioMix? {
         return nil
-    }
-
-    private func makeAVAsset(
-        for resource: String,
-        with fileExtension: String
-    ) -> AVAsset? {
-
-        guard let url = Bundle.main.url(forResource: resource, withExtension: fileExtension) else {
-            return nil
-        }
-        let asset = AVAsset(url: url)
-        return asset
     }
 }
 

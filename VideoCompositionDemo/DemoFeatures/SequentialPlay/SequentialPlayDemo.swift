@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-private struct SequentialTrackContext: TrackContext {
+private struct SequentialTrackContext: TrackContextProtocol {
     let asset: AVAsset
     let preferredTimeRange: CMTimeRange
     let preferredStartTime: CMTime
@@ -18,7 +18,7 @@ private struct SequentialTrackContext: TrackContext {
 final class SequentialPlayDemo: PlayerItemMaker {
 
     func makePlayerItem() -> AVPlayerItem? {
-        let manipulators: [TrackContext] = makeTrackContexts()
+        let manipulators: [TrackContextProtocol] = makeTrackContexts()
         guard !manipulators.isEmpty else { return nil }
 
         // For handling how all the tracks(video/audio) are played with their specific time ranges.
@@ -37,7 +37,7 @@ final class SequentialPlayDemo: PlayerItemMaker {
 // MARK: - Private functions
 extension SequentialPlayDemo {
 
-    private func makeTrackContexts() -> [TrackContext] {
+    private func makeTrackContexts() -> [TrackContextProtocol] {
         guard
             let firstAsset = makeAVAsset(for: "IMG_1007", with: "MOV"),
             let secondAsset = makeAVAsset(for: "IMG_7459", with: "MOV")
@@ -48,7 +48,7 @@ extension SequentialPlayDemo {
         let duration = CMTime(seconds: 3, preferredTimescale: 600)
         let start = CMTime(seconds: .zero, preferredTimescale: 600)
 
-        let firstTrackContext: TrackContext = {
+        let firstTrackContext: TrackContextProtocol = {
             return SequentialTrackContext(
                 asset: firstAsset,
                 preferredTimeRange: CMTimeRange(start: .zero, duration: duration),
@@ -56,7 +56,7 @@ extension SequentialPlayDemo {
                 preferredTrackID: 1
             )
         }()
-        let secondTrackContext: TrackContext = {
+        let secondTrackContext: TrackContextProtocol = {
             return SequentialTrackContext(
                 asset: secondAsset,
                 preferredTimeRange: CMTimeRange(start: .zero, duration: duration),
@@ -75,7 +75,7 @@ extension SequentialPlayDemo {
         ]
     }
 
-    private func makeComposition(with trackContexts: [TrackContext]) -> AVMutableComposition {
+    private func makeComposition(with trackContexts: [TrackContextProtocol]) -> AVMutableComposition {
         let composition = AVMutableComposition()
 
         trackContexts.forEach { trackContext in
@@ -90,7 +90,7 @@ extension SequentialPlayDemo {
         return composition
     }
 
-    private func makeAudioMix(with trackContexts: [TrackContext]) -> AVAudioMix? {
+    private func makeAudioMix(with trackContexts: [TrackContextProtocol]) -> AVAudioMix? {
         // Don't need to use it in this sample case.
         return nil
     }
@@ -114,7 +114,7 @@ extension SequentialPlayDemo {
 // MARK: - About making VideoComposition
 extension SequentialPlayDemo {
 
-    private func makeVideoComposition(with trackContexts: [TrackContext]) -> AVVideoComposition? {
+    private func makeVideoComposition(with trackContexts: [TrackContextProtocol]) -> AVVideoComposition? {
         guard !trackContexts.isEmpty else {
             return nil
         }
@@ -153,7 +153,7 @@ extension SequentialPlayDemo {
         return videoComposition
     }
 
-    private func makeInstruction(with trackContexts: [TrackContext]) -> AVVideoCompositionInstruction? {
+    private func makeInstruction(with trackContexts: [TrackContextProtocol]) -> AVVideoCompositionInstruction? {
 
         let (timeRange, layerInstructions): (CMTimeRange, [AVVideoCompositionLayerInstruction]) = trackContexts
             .enumerated()
@@ -180,7 +180,7 @@ extension SequentialPlayDemo {
         return videoInstruction
     }
 
-    private func makeLayerInstruction(with trackContext: TrackContext) -> AVVideoCompositionLayerInstruction? {
+    private func makeLayerInstruction(with trackContext: TrackContextProtocol) -> AVVideoCompositionLayerInstruction? {
         let trackID = trackContext.trackID(for: .video)
         guard let assetTrack = trackContext.asset.track(withTrackID: trackID) else {
             return nil
@@ -193,7 +193,7 @@ extension SequentialPlayDemo {
         )
 
         // Disappear when finish
-        let instruction = {
+        let instruction: AVVideoCompositionLayerInstruction = {
             let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: assetTrack)
             layerInstruction.setOpacity(1, at: startTime)
             layerInstruction.setOpacity(0, at: timeRange.end)
