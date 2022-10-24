@@ -11,4 +11,6 @@ import AVFoundation
 enum VideoCompositingError: Error {
     case generateOutputPixelBufferFailed
     case incorrectVideoCompositionInstructionType(currentInstruction: AVVideoCompositionInstructionProtocol)
+    case currentLayerInstructionNotFound
+    case targetSourceFrameNotFound
 }

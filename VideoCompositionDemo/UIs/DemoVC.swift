@@ -20,7 +20,8 @@ final class DemoVC: UIViewController {
 //            BasicDemo()
 //            SequentialPlayDemo()
 //            ParallelPlayDemo()
-            WatermarkDemo()
+//            WatermarkDemo()
+            CustomTransitionDemo()
         }()
 
         guard let playerItem = demo.makePlayerItem() else {

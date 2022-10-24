@@ -23,7 +23,7 @@ final class WatermarkDemoVideoCompositor: NSObject, AVVideoCompositing {
     ]
 
     func renderContextChanged(_ newRenderContext: AVVideoCompositionRenderContext) {
-        // TODO: leave some notes here about why/why not
+        // The renderContext won't change in our demo case
     }
 
     /*
