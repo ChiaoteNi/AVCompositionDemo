@@ -23,11 +23,11 @@ final class ParallelPlayDemo: PlayerItemMaker {
         guard !manipulators.isEmpty else { return nil }
 
         // For handling how all the tracks(video/audio) are played with their specific time ranges.
-        let composition = makeComposition(with: manipulators)
+        let composition: AVComposition = makeComposition(with: manipulators)
         // For getting more granular control for how the frames are rendered.
-        let videoComposition = makeVideoComposition(with: manipulators)
+        let videoComposition: AVVideoComposition? = makeVideoComposition(with: manipulators)
         // For getting more granular control for how the sounds are played.
-        let audioMix = makeAudioMix(with: manipulators)
+        let audioMix: AVAudioMix? = makeAudioMix(with: manipulators)
 
         return AVPlayerItem(asset: composition)
             .set(\.seekingWaitsForVideoCompositionRendering, to: true)

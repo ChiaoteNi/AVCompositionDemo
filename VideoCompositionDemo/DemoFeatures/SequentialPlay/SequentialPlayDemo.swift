@@ -22,11 +22,11 @@ final class SequentialPlayDemo: PlayerItemMaker {
         guard !manipulators.isEmpty else { return nil }
 
         // For handling how all the tracks(video/audio) are played with their specific time ranges.
-        let composition = makeComposition(with: manipulators)
+        let composition: AVComposition = makeComposition(with: manipulators)
         // For getting more granular control for how the frames are rendered.
-        let videoComposition = makeVideoComposition(with: manipulators)
+        let videoComposition: AVVideoComposition? = makeVideoComposition(with: manipulators)
         // For getting more granular control for how the sounds are played.
-        let audioMix = makeAudioMix(with: manipulators)
+        let audioMix: AVAudioMix? = makeAudioMix(with: manipulators)
 
         return AVPlayerItem(asset: composition)
             .set(\.videoComposition, to: videoComposition)
@@ -119,7 +119,7 @@ extension SequentialPlayDemo {
             return nil
         }
 
-        //        let videoComposition: AVVideoComposition? = nil
+//        let videoComposition: AVVideoComposition? = nil
 
         let videoComposition: AVVideoComposition? = {
             guard let instruction = makeInstruction(with: trackContexts) else {
@@ -135,20 +135,6 @@ extension SequentialPlayDemo {
             composition.frameDuration = CMTime(seconds: 1/600, preferredTimescale: 600) // It's required.
             return composition
         }()
-
-        //        let videoComposition = {
-        //            let infos = trackContexts.map { (
-        //                $0.asset,
-        //                $0.preferredTimeRange,
-        //                $0.preferredStartTime,
-        //                $0.trackID(for: .video)
-        //            ) }
-        //            let composition = VideoCompositorGenerator().makeVideoCompositor(
-        //                with: infos,
-        //                renderSize: CGSize(width: 1280, height: 720)
-        //            )
-        //            return composition
-        //        }()
 
         return videoComposition
     }
@@ -193,7 +179,7 @@ extension SequentialPlayDemo {
         )
 
         // Disappear when finish
-        let instruction: AVVideoCompositionLayerInstruction = {
+        let instruction: AVVideoCompositionLayerInstruction = { // An object used to modify the transform, cropping, and opacity ramps applied to a given track in a composition.
             let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: assetTrack)
             layerInstruction.setOpacity(1, at: startTime)
             layerInstruction.setOpacity(0, at: timeRange.end)
@@ -201,7 +187,7 @@ extension SequentialPlayDemo {
         }()
 
 //        // Fade in/out
-//        let instruction = {
+//        let instruction: AVVideoCompositionLayerInstruction = {
 //            let fadeInTimeRange = CMTimeRange(
 //                start: timeRange.start,
 //                duration: CMTime(seconds: 1, preferredTimescale: 1)
@@ -217,7 +203,7 @@ extension SequentialPlayDemo {
 //        }()
 
 //        // Overlap
-//        let instruction = {
+//        let instruction: AVVideoCompositionLayerInstruction = {
 //            let timeRange = CMTimeRange(
 //                start: timeRange.end - 1,
 //                duration: CMTime(seconds: 3, preferredTimescale: 1)
@@ -246,7 +232,7 @@ extension SequentialPlayDemo {
 // MARK: - Util functions
 
 extension CMTime {
-    private static func - (_ lhs: CMTime, _ rhs: Double) -> CMTime {
+    fileprivate static func - (_ lhs: CMTime, _ rhs: Double) -> CMTime {
         CMTime(
             seconds: lhs.seconds - rhs,
             preferredTimescale: lhs.timescale

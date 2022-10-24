@@ -27,8 +27,8 @@ extension FocusedOnVideoCompositionDemoPlayerItemMaker {
         let manipulators: [TrackContext] = makeTrackContexts()
         guard !manipulators.isEmpty else { return nil }
 
-        let composition = makeComposition(with: manipulators)
-        let videoComposition = makeVideoComposition(with: manipulators)
+        let composition: AVComposition = makeComposition(with: manipulators)
+        let videoComposition: AVVideoComposition? = makeVideoComposition(with: manipulators)
 
         return AVPlayerItem(asset: composition)
             .set(\.videoComposition, to: videoComposition)

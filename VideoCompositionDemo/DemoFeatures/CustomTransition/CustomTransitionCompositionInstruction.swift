@@ -27,12 +27,13 @@ final class CustomTransitionCompositionInstruction: NSObject, AVVideoComposition
     /// Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above.
     var timeRange: CMTimeRange
     /// If NO, indicates that post-processing should be skipped for the duration of this instruction.
-    var enablePostProcessing: Bool = false
+    var enablePostProcessing: Bool = true
     /// If YES, rendering a frame from the same source buffers and the same composition instruction at 2 different compositionTime may yield different output frames.
     /// If NO, 2 such compositions would yield the same frame.
     /// The media pipeline may me able to avoid some duplicate processing when containsTweening is NO
     var containsTweening: Bool = true
-    /// List of video track IDs required to compose frames for this instruction. If the value of this property is nil, all source tracks will be considered required for composition
+    /// List of video track IDs required to compose frames for this instruction.
+    /// If the value of this property is nil, all source tracks will be considered required for composition
     var requiredSourceTrackIDs: [NSValue]?
     /// If for the duration of the instruction, the video composition result is one of the source frames, this property should
     /// return the corresponding track ID. The compositor won't be run for the duration of the instruction and the proper source

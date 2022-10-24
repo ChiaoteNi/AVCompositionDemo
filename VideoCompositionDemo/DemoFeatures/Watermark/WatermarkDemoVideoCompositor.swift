@@ -29,8 +29,7 @@ final class WatermarkDemoVideoCompositor: NSObject, AVVideoCompositing {
     /*
      - This delegate function will be invoke for every frame
      - If you intend to finish rendering the frame after your handling of this message returns, you must retain the instance of AVAsynchronousVideoCompositionRequest until after composition is finished.
-     - If the custom compositor's implementation of -startVideoCompositionRequest: returns without finishing the composition immediately,
-     it may be invoked again with another composition request before the prior request is finished; therefore in such cases the custom compositor should be prepared to manage multiple composition requests.
+     - If the custom compositor's implementation of -startVideoCompositionRequest: returns without finishing the composition immediately, it may be invoked again with another composition request before the prior request is finished; therefore in such cases the custom compositor should be prepared to manage multiple composition requests.
      - The above description is also the reason why most of the libs, which do this with Metal, will put this procedure into a queue, and make the procedure to be cancelable.
      */
     func startRequest(_ asyncVideoCompositionRequest: AVAsynchronousVideoCompositionRequest) {
@@ -62,7 +61,7 @@ final class WatermarkDemoVideoCompositor: NSObject, AVVideoCompositing {
         // so I designed the demo with only one video track existing, which can make the demo simpler
         // and easier to understand the primary part of this demo
         // However, you should not do this in most other situations
-        let pixelBuffer: CVPixelBuffer? = request.sourceTrackIDs
+        let currentFrameBuffer: CVPixelBuffer? = request.sourceTrackIDs
             .compactMap { id in
                 let trackID = CMPersistentTrackID(
                     truncating: id
@@ -70,16 +69,16 @@ final class WatermarkDemoVideoCompositor: NSObject, AVVideoCompositing {
                 return request.sourceFrame(byTrackID: trackID)
             }.first
 
-        guard let pixelBuffer = pixelBuffer else {
+        guard let outputBuffer = currentFrameBuffer else {
             let error: VideoCompositingError = .generateOutputPixelBufferFailed
             asyncVideoCompositionRequest.finish(with: error)
             return
         }
 
-        let bufferWidth = CVPixelBufferGetWidth(pixelBuffer)
-        let bufferHeight = CVPixelBufferGetHeight(pixelBuffer)
+        let bufferWidth = CVPixelBufferGetWidth(outputBuffer)
+        let bufferHeight = CVPixelBufferGetHeight(outputBuffer)
 
-        let watermarkLength = CGFloat(bufferWidth / 10)
+        let watermarkLength = CGFloat(bufferWidth / 5)
         let watermarkFrame = CGRect(
             origin: CGPoint(
                 x: CGFloat(bufferWidth) - watermarkLength,
@@ -92,19 +91,25 @@ final class WatermarkDemoVideoCompositor: NSObject, AVVideoCompositing {
         )
 
         // lock the buffer, then create a new context to draw the watermark
-        CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
+        CVPixelBufferLockBaseAddress(outputBuffer, .readOnly)
         let context = CGContext(
-            data: CVPixelBufferGetBaseAddress(pixelBuffer),
+            data: CVPixelBufferGetBaseAddress(outputBuffer),
             width: bufferWidth,
             height: bufferHeight,
             bitsPerComponent: instruction.bitsPerComponent,
-            bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer),
+            // bytesPerRow: The number of bytes of memory to use per row of the bitmap.
+            // If the data parameter is NULL, passing a value of 0 causes the value to be calculated automatically.
+            // CVPixelBufferGetBytesPerRow:
+            // for planar buffers, this function returns a rowBytes value such that bytesPerRow * height
+            // covers the entire image, including all planes.
+            // ex: a 1920x1080 PixelBuffer -> return 7680
+            bytesPerRow: CVPixelBufferGetBytesPerRow(outputBuffer),
             space: instruction.colorSpace,
             bitmapInfo: instruction.bitmapInfo
         )
         context?.draw(image, in: watermarkFrame)
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, .readOnly)
+        CVPixelBufferUnlockBaseAddress(outputBuffer, .readOnly)
 
-        request.finish(withComposedVideoFrame: pixelBuffer)
+        request.finish(withComposedVideoFrame: outputBuffer)
     }
 }

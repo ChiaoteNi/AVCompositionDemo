@@ -32,7 +32,7 @@ final class CustomTransitionVideoCompositor: NSObject, AVVideoCompositing {
     private var metalRenderer: APLMetalRenderer = APLDiagonalWipeRenderer()! // APLCrossDissolveRenderer()!
 
     // Dispatch Queue used to issue custom compositor rendering work requests.
-    private var renderingQueue = DispatchQueue(label: "com.videoCompositionDemo.renderingqueue")
+    private var renderingQueue = DispatchQueue(label: "com.videoCompositionDemo.renderingQueue")
 
     // MARK: AVVideoCompositing functions
 
@@ -47,14 +47,14 @@ final class CustomTransitionVideoCompositor: NSObject, AVVideoCompositing {
      - The above description is also the reason why most of the libs, which do this with Metal, will put this procedure into a queue, and make the procedure to be cancelable.
      */
     func startRequest(_ asyncVideoCompositionRequest: AVAsynchronousVideoCompositionRequest) {
-                renderingQueue.async {
-        do {
-            let result = try self.newRenderedPixelBufferForRequest(asyncVideoCompositionRequest)
-            asyncVideoCompositionRequest.finish(withComposedVideoFrame: result)
-        } catch {
-            asyncVideoCompositionRequest.finish(with: error)
+        renderingQueue.async {
+            do {
+                let result = try self.newRenderedPixelBufferForRequest(asyncVideoCompositionRequest)
+                asyncVideoCompositionRequest.finish(withComposedVideoFrame: result)
+            } catch {
+                asyncVideoCompositionRequest.finish(with: error)
+            }
         }
-                }
     }
 }
 
@@ -69,8 +69,9 @@ extension CustomTransitionVideoCompositor {
             )
             throw error
         }
-
+        // Get the current frame time.
         let currentTime = request.compositionTime
+        // It's not required, just to make the reduce process easier to read. (initialPair)
         let initialPair: (CustomTransitionLayerInstruction?, CustomTransitionLayerInstruction?) = (nil, nil)
 
         let (target, previous) = instruction.videoLayerInstructions
@@ -94,14 +95,17 @@ extension CustomTransitionVideoCompositor {
 
         let tweenFactor: Float = {
             let elapsed = CMTimeSubtract(currentTime, targetLayerInstruction.startTime)
-            let progress = elapsed.seconds / 2
+            let progress = elapsed.seconds / 2 // animation on 0 -> 2 seconds
             return Float(min(progress, 1))
         }()
 
         guard
+            // Check if the frame needs to be rendered.
             tweenFactor < 1,
+            // Get the foreground buffer
             let previousLayerInstruction = previous,
             let previousFrameBuffer = request.sourceFrame(byTrackID: previousLayerInstruction.trackID),
+            // Get a blank buffer to render.
             let outputBuffer: CVPixelBuffer = request.renderContext.newPixelBuffer()
         else {
             return targetBuffer

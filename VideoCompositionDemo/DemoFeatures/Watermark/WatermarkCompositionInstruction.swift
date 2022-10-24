@@ -14,7 +14,9 @@ final class WatermarkCompositionInstruction: NSObject, AVVideoCompositionInstruc
 
     /// The number of bits to use for each component of a pixel in memory.
     ///
-    /// For example, for a 32-bit pixel format and an RGB color space, you would specify a value of 8 bits per component.
+    /// For example, for a 32-bit pixel format and an RGBA color space, you would specify a value of 8 bits per component.
+    /// That means R = 8bit, G = 8bit, B = 8bit, and A = 8bit
+    /// component: R/G/B/A
     /// For the list of supported pixel formats, you can see
     /// [Supported Pixel Formats](https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html#//apple_ref/doc/uid/TP30001066-CH203-BCIBHHBB)
     let bitsPerComponent: Int = 8
@@ -23,15 +25,21 @@ final class WatermarkCompositionInstruction: NSObject, AVVideoCompositionInstruc
         CGColorSpaceCreateDeviceRGB()
     }
 
-    let bitmapInfo: UInt32 = CGImageAlphaInfo.premultipliedLast.rawValue
+    /// Storage options for alpha component data.
+    ///
+    /// (1) whether a bitmap contains an alpha channel
+    /// (2) where the alpha bits are located in the image data
+    /// (3) whether the alpha value is premultiplied.
+    let bitmapInfo: UInt32 = CGImageAlphaInfo.premultipliedLast.rawValue // RGBA
 
     // MARK: Properties for AVVideoCompositionInstructionProtocol
 
-    /// Indicates the timeRange during which the instruction is effective. Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above.
+    /// Indicates the timeRange during which the instruction is effective.
+    /// Note requirements for the timeRanges of instructions described in connection with AVVideoComposition's instructions key above.
     var timeRange: CMTimeRange
 
     /// If NO, indicates that post-processing should be skipped for the duration of this instruction.
-    var enablePostProcessing: Bool = true
+    var enablePostProcessing: Bool = false
 
     /// If YES, rendering a frame from the same source buffers and the same composition instruction at 2 different compositionTime may yield different output frames.
     /// If NO, 2 such compositions would yield the same frame.
