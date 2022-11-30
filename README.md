@@ -20,9 +20,9 @@
       - 影片的轉場
   - 本次將重點著重在 AVVideoComposition 的介紹，故會暫以Apple的MetalRenderer代為處理Metal部分的操作
 
-### PART III - AVVideoComposition後續＆AVAudioMix (11/22)
-- 將會介紹AVVideoComposition剩餘部分，包含：
- -  CustomVideoComposition 搭配 Metal 的使用
- - 如何處理圖片/影片混合播放
- - 影片播放上時覆蓋另一影片 / 動畫
- - 如果時間足夠，將會包含AVAudioMix部分
+### PART III - VideoComposition rendering with Metal(11/29)
+- 將會介紹如何用MetalKit處理VideoComposition的渲染部分，包含：
+  - 實作時的注意事項，Metal的座標系統，以及一點點點最基本Metal language的說明
+  - 如何並行播放＆與圖片混合播放
+  - 如何做客製化轉場
+### PART IV - AudioMix

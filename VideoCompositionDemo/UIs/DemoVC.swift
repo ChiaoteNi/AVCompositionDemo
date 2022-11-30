@@ -21,6 +21,7 @@ final class DemoVC: UIViewController {
 //            SequentialPlayDemo()
 //            ParallelPlayDemo()
 //            WatermarkDemo()
+//            ParallelPlayWithMetalDemo()
             CustomTransitionDemo()
         }()
 

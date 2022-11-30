@@ -12,6 +12,15 @@ private struct CustomTransitionError: Error {
     let description: String
 }
 
+protocol MetalRendering {
+    func renderPixelBuffer(
+        _ outputBuffer: CVPixelBuffer,
+        foregroundSource foregroundPixelBuffer: CVPixelBuffer,
+        backgroundSource backgroundPixelBuffer: CVPixelBuffer,
+        forTweenFactor tween: Float
+    )
+}
+
 final class CustomTransitionVideoCompositor: NSObject, AVVideoCompositing {
 
     // MARK: AVVideoCompositing properties
@@ -26,10 +35,8 @@ final class CustomTransitionVideoCompositor: NSObject, AVVideoCompositing {
 
     // MARK: Private properties
 
-    // In the partII demo, we won't be going to focused on metalRendering yet,
-    // I use the demo code made by Apple as the alternatively for now,
-    // so that we can focused on how to make a CustomVideoCompositor first.
-    private var metalRenderer: APLMetalRenderer = APLDiagonalWipeRenderer()! // APLCrossDissolveRenderer()!
+    // The primary part for the part III demo
+    private var metalRenderer: MetalRendering? = DissolvedMetalRenderer() // DissolvedMetalRenderer() // CustomMetalRenderer()
 
     // Dispatch Queue used to issue custom compositor rendering work requests.
     private var renderingQueue = DispatchQueue(label: "com.videoCompositionDemo.renderingQueue")
@@ -111,11 +118,11 @@ extension CustomTransitionVideoCompositor {
             return targetBuffer
         }
 
-        metalRenderer.renderPixelBuffer(
+        metalRenderer?.renderPixelBuffer(
             outputBuffer,
-            usingForegroundSourceBuffer:previousFrameBuffer,
-            andBackgroundSourceBuffer:targetBuffer,
-            forTweenFactor:tweenFactor
+            foregroundSource: previousFrameBuffer,
+            backgroundSource: targetBuffer,
+            forTweenFactor: tweenFactor
         )
         return outputBuffer
     }

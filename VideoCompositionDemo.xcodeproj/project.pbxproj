@@ -24,15 +24,18 @@
 		9326153E28CD8C5100D262BC /* VideoCompositionDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9326153D28CD8C5100D262BC /* VideoCompositionDemoTests.swift */; };
 		9326154828CD8C5100D262BC /* VideoCompositionDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9326154728CD8C5100D262BC /* VideoCompositionDemoUITests.swift */; };
 		9326154A28CD8C5100D262BC /* VideoCompositionDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9326154928CD8C5100D262BC /* VideoCompositionDemoUITestsLaunchTests.swift */; };
-		93491C90290672B80010273F /* APLDiagonalWipeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93491C7D290672B80010273F /* APLDiagonalWipeRenderer.swift */; };
-		93491C94290672B80010273F /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 93491C81290672B80010273F /* Shaders.metal */; };
-		93491C97290672B80010273F /* APLMetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93491C86290672B80010273F /* APLMetalRenderer.swift */; };
-		93491CA22906D4410010273F /* APLCrossDissolveRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93491CA12906D4410010273F /* APLCrossDissolveRenderer.swift */; };
 		9358219C28D0925900526F60 /* BasicDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9358219B28D0925900526F60 /* BasicDemo.swift */; };
 		9358219E28D0936200526F60 /* PlayerItemMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9358219D28D0936200526F60 /* PlayerItemMaker.swift */; };
 		935821A028D0947400526F60 /* SequentialPlayDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9358219F28D0947400526F60 /* SequentialPlayDemo.swift */; };
 		935821A328D0960200526F60 /* CustomTransitionDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935821A228D0960200526F60 /* CustomTransitionDemo.swift */; };
 		935821A528D0962600526F60 /* WatermarkDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935821A428D0962600526F60 /* WatermarkDemo.swift */; };
+		936834BE29347C0700120242 /* DissolvedMetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936834BD29347C0700120242 /* DissolvedMetalRenderer.swift */; };
+		936834C02934834D00120242 /* DissolvedShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 936834BF2934834D00120242 /* DissolvedShaders.metal */; };
+		936834C42934F3F000120242 /* ParallelPlayWithMetalDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936834C32934F3F000120242 /* ParallelPlayWithMetalDemo.swift */; };
+		936834C62934F59800120242 /* ParallelPlayWithMetalVideoCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936834C52934F59800120242 /* ParallelPlayWithMetalVideoCompositor.swift */; };
+		936834C82934F5B400120242 /* ParallelPlayWithMetalCompositionInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936834C72934F5B400120242 /* ParallelPlayWithMetalCompositionInstruction.swift */; };
+		936834CB2934F64700120242 /* ParallelPlayMetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936834CA2934F64700120242 /* ParallelPlayMetalRenderer.swift */; };
+		936834CD2934F65500120242 /* PassthroughShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 936834CC2934F65500120242 /* PassthroughShader.metal */; };
 		93B37F1F28FAEE94004D8141 /* TrackContextProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B37F1E28FAEE94004D8141 /* TrackContextProtocol.swift */; };
 		93C38A9F2904B9A900DEE74D /* good.png in Resources */ = {isa = PBXBuildFile; fileRef = 93C38A9E2904B9A900DEE74D /* good.png */; };
 		93C38AA12904BABD00DEE74D /* WatermarkDemoVideoCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C38AA02904BABD00DEE74D /* WatermarkDemoVideoCompositor.swift */; };
@@ -83,16 +86,19 @@
 		9326154328CD8C5100D262BC /* VideoCompositionDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoCompositionDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9326154728CD8C5100D262BC /* VideoCompositionDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCompositionDemoUITests.swift; sourceTree = "<group>"; };
 		9326154928CD8C5100D262BC /* VideoCompositionDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCompositionDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		93491C7D290672B80010273F /* APLDiagonalWipeRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APLDiagonalWipeRenderer.swift; sourceTree = "<group>"; };
-		93491C81290672B80010273F /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
-		93491C86290672B80010273F /* APLMetalRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APLMetalRenderer.swift; sourceTree = "<group>"; };
-		93491CA12906D4410010273F /* APLCrossDissolveRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APLCrossDissolveRenderer.swift; sourceTree = "<group>"; };
 		9358219B28D0925900526F60 /* BasicDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDemo.swift; sourceTree = "<group>"; };
 		9358219D28D0936200526F60 /* PlayerItemMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerItemMaker.swift; sourceTree = "<group>"; };
 		9358219F28D0947400526F60 /* SequentialPlayDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequentialPlayDemo.swift; sourceTree = "<group>"; };
 		935821A228D0960200526F60 /* CustomTransitionDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionDemo.swift; sourceTree = "<group>"; };
 		935821A428D0962600526F60 /* WatermarkDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatermarkDemo.swift; sourceTree = "<group>"; };
 		935821A628D09C8500526F60 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
+		936834BD29347C0700120242 /* DissolvedMetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DissolvedMetalRenderer.swift; sourceTree = "<group>"; };
+		936834BF2934834D00120242 /* DissolvedShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = DissolvedShaders.metal; sourceTree = "<group>"; };
+		936834C32934F3F000120242 /* ParallelPlayWithMetalDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelPlayWithMetalDemo.swift; sourceTree = "<group>"; };
+		936834C52934F59800120242 /* ParallelPlayWithMetalVideoCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelPlayWithMetalVideoCompositor.swift; sourceTree = "<group>"; };
+		936834C72934F5B400120242 /* ParallelPlayWithMetalCompositionInstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelPlayWithMetalCompositionInstruction.swift; sourceTree = "<group>"; };
+		936834CA2934F64700120242 /* ParallelPlayMetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallelPlayMetalRenderer.swift; sourceTree = "<group>"; };
+		936834CC2934F65500120242 /* PassthroughShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PassthroughShader.metal; sourceTree = "<group>"; };
 		93B37F1E28FAEE94004D8141 /* TrackContextProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContextProtocol.swift; sourceTree = "<group>"; };
 		93C38A9E2904B9A900DEE74D /* good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = good.png; sourceTree = "<group>"; };
 		93C38AA02904BABD00DEE74D /* WatermarkDemoVideoCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatermarkDemoVideoCompositor.swift; sourceTree = "<group>"; };
@@ -181,6 +187,13 @@
 			path = "Photo&Videos";
 			sourceTree = "<group>";
 		};
+		93122CF72937043300A295BD /* Audiomix */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Audiomix;
+			sourceTree = "<group>";
+		};
 		9326151A28CD8C5000D262BC = {
 			isa = PBXGroup;
 			children = (
@@ -235,10 +248,8 @@
 		93491C7C290672B80010273F /* Metal Renderers */ = {
 			isa = PBXGroup;
 			children = (
-				93491C86290672B80010273F /* APLMetalRenderer.swift */,
-				93491C7D290672B80010273F /* APLDiagonalWipeRenderer.swift */,
-				93491CA12906D4410010273F /* APLCrossDissolveRenderer.swift */,
-				93491C81290672B80010273F /* Shaders.metal */,
+				93F213012933BDA30027CB8A /* Dissolved */,
+				93F213002933BD980027CB8A /* DiagonalWiped */,
 			);
 			path = "Metal Renderers";
 			sourceTree = "<group>";
@@ -253,7 +264,7 @@
 				93E5446B28D5CCF700B850B7 /* SequentialPlay */,
 				93E5446C28D5CD0700B850B7 /* ParallelPlay */,
 				93E5446E28D5CD6B00B850B7 /* Watermark */,
-				93E5446D28D5CD6200B850B7 /* CustomTransition */,
+				936834C12934EF8E00120242 /* Rendering with Metal */,
 				935821A128D095BC00526F60 /* TODO */,
 			);
 			path = DemoFeatures;
@@ -262,8 +273,38 @@
 		935821A128D095BC00526F60 /* TODO */ = {
 			isa = PBXGroup;
 			children = (
+				93122CF72937043300A295BD /* Audiomix */,
 			);
 			path = TODO;
+			sourceTree = "<group>";
+		};
+		936834C12934EF8E00120242 /* Rendering with Metal */ = {
+			isa = PBXGroup;
+			children = (
+				936834C22934EFCA00120242 /* ParallelPlay */,
+				93E5446D28D5CD6200B850B7 /* CustomTransition */,
+			);
+			path = "Rendering with Metal";
+			sourceTree = "<group>";
+		};
+		936834C22934EFCA00120242 /* ParallelPlay */ = {
+			isa = PBXGroup;
+			children = (
+				936834C32934F3F000120242 /* ParallelPlayWithMetalDemo.swift */,
+				936834C52934F59800120242 /* ParallelPlayWithMetalVideoCompositor.swift */,
+				936834C72934F5B400120242 /* ParallelPlayWithMetalCompositionInstruction.swift */,
+				936834C92934F62300120242 /* Metal Renderer */,
+			);
+			path = ParallelPlay;
+			sourceTree = "<group>";
+		};
+		936834C92934F62300120242 /* Metal Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				936834CA2934F64700120242 /* ParallelPlayMetalRenderer.swift */,
+				936834CC2934F65500120242 /* PassthroughShader.metal */,
+			);
+			path = "Metal Renderer";
 			sourceTree = "<group>";
 		};
 		93B37F2028FB1BD1004D8141 /* BasicDemo */ = {
@@ -309,6 +350,22 @@
 				93C38AA22904BC6E00DEE74D /* WatermarkCompositionInstruction.swift */,
 			);
 			path = Watermark;
+			sourceTree = "<group>";
+		};
+		93F213002933BD980027CB8A /* DiagonalWiped */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DiagonalWiped;
+			sourceTree = "<group>";
+		};
+		93F213012933BDA30027CB8A /* Dissolved */ = {
+			isa = PBXGroup;
+			children = (
+				936834BD29347C0700120242 /* DissolvedMetalRenderer.swift */,
+				936834BF2934834D00120242 /* DissolvedShaders.metal */,
+			);
+			path = Dissolved;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,15 +505,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93491C90290672B80010273F /* APLDiagonalWipeRenderer.swift in Sources */,
+				936834C02934834D00120242 /* DissolvedShaders.metal in Sources */,
 				9358219E28D0936200526F60 /* PlayerItemMaker.swift in Sources */,
 				9303EFC728CD8D39009C7554 /* Array + SafetyAccess.swift in Sources */,
+				936834CD2934F65500120242 /* PassthroughShader.metal in Sources */,
 				9303EFDA28CD97F7009C7554 /* DemoVC.swift in Sources */,
 				935821A028D0947400526F60 /* SequentialPlayDemo.swift in Sources */,
 				9303F01728CE4703009C7554 /* ParallelPlayDemo.swift in Sources */,
-				93491C97290672B80010273F /* APLMetalRenderer.swift in Sources */,
 				93C38AA12904BABD00DEE74D /* WatermarkDemoVideoCompositor.swift in Sources */,
-				93491CA22906D4410010273F /* APLCrossDissolveRenderer.swift in Sources */,
 				9303EFC428CD8D33009C7554 /* UIView + Constraints.swift in Sources */,
 				9303EFC528CD8D33009C7554 /* NSObject + Builder.swift in Sources */,
 				93C38AA52904D4A000DEE74D /* AVAsset + constructor.swift in Sources */,
@@ -464,12 +520,16 @@
 				93C38AA72904E55400DEE74D /* VideoCompositingError.swift in Sources */,
 				9326152728CD8C5000D262BC /* AppDelegate.swift in Sources */,
 				93C38AAD29053CD100DEE74D /* CustomTransitionCompositionInstruction.swift in Sources */,
-				93491C94290672B80010273F /* Shaders.metal in Sources */,
 				93C38AA32904BC6E00DEE74D /* WatermarkCompositionInstruction.swift in Sources */,
+				936834C42934F3F000120242 /* ParallelPlayWithMetalDemo.swift in Sources */,
 				93B37F1F28FAEE94004D8141 /* TrackContextProtocol.swift in Sources */,
+				936834C62934F59800120242 /* ParallelPlayWithMetalVideoCompositor.swift in Sources */,
 				93C38AAB29053C3600DEE74D /* CustomTransitionVideoCompositor.swift in Sources */,
+				936834BE29347C0700120242 /* DissolvedMetalRenderer.swift in Sources */,
 				935821A528D0962600526F60 /* WatermarkDemo.swift in Sources */,
 				9326152928CD8C5000D262BC /* SceneDelegate.swift in Sources */,
+				936834C82934F5B400120242 /* ParallelPlayWithMetalCompositionInstruction.swift in Sources */,
+				936834CB2934F64700120242 /* ParallelPlayMetalRenderer.swift in Sources */,
 				9358219C28D0925900526F60 /* BasicDemo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
